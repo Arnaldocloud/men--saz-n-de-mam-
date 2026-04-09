@@ -744,17 +744,11 @@
                     </div>
                     <span class="cat-label">Todos</span>
                 </div>
-                <div class="cat-item" onclick="setCategory(this,'pizza')">
+                <div class="cat-item" onclick="setCategory(this,'burger')">
                     <div class="cat-circle">
-                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80" alt="Pizza">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" alt="Burgers">
                     </div>
-                    <span class="cat-label">Pizza</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'combo')">
-                    <div class="cat-circle">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" alt="Combos">
-                    </div>
-                    <span class="cat-label">Combos</span>
+                    <span class="cat-label">Burgers</span>
                 </div>
                 <div class="cat-item" onclick="setCategory(this,'bebida')">
                     <div class="cat-circle">
@@ -768,7 +762,7 @@
 
         <!-- Featured -->
         <div class="feat-header">
-            <h2>Comida Destacada</h2>
+            <h2>Nuestro Menú 🍔</h2>
             <button class="see-all">Ver Todo</button>
         </div>
 
@@ -900,42 +894,202 @@
    DATA
 ══════════════════════════════════════════ */
 const MENU = [
+    // ── HAMBURGUESAS ──
     {
         id: 1,
-        name: 'Pizza Especial La Sazón',
-        category: 'pizza',
-        rating: 5.0,
-        reviews: '94',
-        time: '20–30 Min',
-        kcal: '850 Kcal',
-        desc: 'Jamón, tocineta, maíz dulce, pimiento y extra queso cheddar. <em>Incluye Refresco 1.5L.</em>',
-        img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80',
-        sizes: ['Personal', 'Mediana', 'Grande'],
-        prices: [12, 16, 20],
+        name: 'Normal',
+        category: 'burger',
+        rating: 4.8, reviews: '38', time: '15–20 Min', kcal: '650 Kcal',
+        desc: '200gr de carne redonda, tocineta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [10],
         addons: [
-            { name: 'Extra Queso Cheddar', price: 2 },
-            { name: 'Tocineta Extra',      price: 2 },
-            { name: 'Salsa BBQ',           price: 1 },
+            { name: 'Tocineta Extra',  price: 1 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Huevo Extra',     price: 1 },
         ]
     },
     {
         id: 2,
-        name: 'Combo 3 de Chuleta',
-        category: 'combo',
-        rating: 4.8,
-        reviews: '67',
-        time: '15–25 Min',
-        kcal: '1 200 Kcal',
-        desc: '3 Hamburguesas de 150g de chuleta ahumada + papitas. <em>Incluye Refresco 2L.</em>',
-        img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80',
-        sizes: ['Sencillo', 'Doble', 'Triple'],
-        prices: [16, 20, 24],
+        name: 'Especial',
+        category: 'burger',
+        rating: 4.9, reviews: '52', time: '15–20 Min', kcal: '950 Kcal',
+        desc: '400gr Carne redonda, tocineta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [12.5],
         addons: [
-            { name: 'Papas Extra',          price: 3 },
-            { name: 'Salsa Especial',        price: 1 },
-            { name: 'Queso Cheddar Extra',   price: 2 },
+            { name: 'Tocineta Extra',  price: 1 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Huevo Extra',     price: 1 },
         ]
-    }
+    },
+    {
+        id: 3,
+        name: 'Mechipan',
+        category: 'burger',
+        rating: 4.9, reviews: '61', time: '15–20 Min', kcal: '700 Kcal',
+        desc: 'Carne mechada, tocineta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [13],
+        addons: [
+            { name: 'Tocineta Extra',  price: 1 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Huevo Extra',     price: 1 },
+        ]
+    },
+    {
+        id: 4,
+        name: 'Llanerita',
+        category: 'burger',
+        rating: 4.8, reviews: '44', time: '15–20 Min', kcal: '720 Kcal',
+        desc: 'Carne picada, tocineta, huevo, jamón, 3 lonjas de queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [13],
+        addons: [
+            { name: 'Tocineta Extra',  price: 1 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Huevo Extra',     price: 1 },
+        ]
+    },
+    {
+        id: 5,
+        name: 'Rebulladita Pollo',
+        category: 'burger',
+        rating: 4.9, reviews: '57', time: '15–20 Min', kcal: '780 Kcal',
+        desc: 'Carne redonda, tocineta, pollo, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [14],
+        addons: [
+            { name: 'Tocineta Extra',  price: 1 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Pollo Extra',     price: 2 },
+        ]
+    },
+    {
+        id: 6,
+        name: 'Carteluda',
+        category: 'burger',
+        rating: 5.0, reviews: '49', time: '15–20 Min', kcal: '850 Kcal',
+        desc: 'Carne mechada a la que desees, Chorizo, tocineta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [14],
+        addons: [
+            { name: 'Chorizo Extra',   price: 2 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Tocineta Extra',  price: 1 },
+        ]
+    },
+    {
+        id: 7,
+        name: 'Mechipan Mixto',
+        category: 'burger',
+        rating: 4.9, reviews: '63', time: '15–20 Min', kcal: '800 Kcal',
+        desc: 'Carne mechada a la que desees, pollo, tocineta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [14],
+        addons: [
+            { name: 'Pollo Extra',     price: 2 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Tocineta Extra',  price: 1 },
+        ]
+    },
+    {
+        id: 8,
+        name: 'Chuletazo Especial',
+        category: 'burger',
+        rating: 5.0, reviews: '71', time: '15–20 Min', kcal: '900 Kcal',
+        desc: 'Chuleta, pollo, tocineta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [12.5],
+        addons: [
+            { name: 'Chuleta Extra',   price: 2 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Tocineta Extra',  price: 1 },
+        ]
+    },
+    {
+        id: 9,
+        name: 'Ligadito',
+        category: 'burger',
+        rating: 4.9, reviews: '55', time: '15–20 Min', kcal: '950 Kcal',
+        desc: 'Carne picada, pollo, tocineta, chuleta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [15],
+        addons: [
+            { name: 'Chuleta Extra',   price: 2 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Tocineta Extra',  price: 1 },
+        ]
+    },
+    {
+        id: 10,
+        name: 'Rebulladita Carne',
+        category: 'burger',
+        rating: 4.9, reviews: '48', time: '15–20 Min', kcal: '1000 Kcal',
+        desc: 'Carne redonda, carne mechada, tocineta, huevo, jamón, queso mozzarella. <em>Incluye lechuga, tomate, papitas ralladas y salsas.</em>',
+        img: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [14],
+        addons: [
+            { name: 'Carne Extra',     price: 2 },
+            { name: 'Queso Extra',     price: 1 },
+            { name: 'Tocineta Extra',  price: 1 },
+        ]
+    },
+    {
+        id: 11,
+        name: 'SuperCartelua',
+        category: 'burger',
+        rating: 5.0, reviews: '83', time: '20–25 Min', kcal: '1200 Kcal',
+        desc: 'Carne a la que desees, pollo, tocineta, Chorizo, chuleta, huevo, jamón, queso mozzarella. <em>¡La más completa del menú!</em>',
+        img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Estándar'], prices: [18],
+        addons: [
+            { name: 'Chorizo Extra',   price: 2 },
+            { name: 'Chuleta Extra',   price: 2 },
+            { name: 'Queso Extra',     price: 1 },
+        ]
+    },
+    // ── REFRESCOS ──
+    {
+        id: 12,
+        name: 'Refresco Botella',
+        category: 'bebida',
+        rating: 4.7, reviews: '20', time: '5 Min', kcal: '150 Kcal',
+        desc: 'Refresco frío en botella individual. <em>Perfecto para acompañar tu hamburguesa.</em>',
+        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Botella'], prices: [1],
+        addons: []
+    },
+    {
+        id: 13,
+        name: 'Refresco 1 Litro',
+        category: 'bebida',
+        rating: 4.7, reviews: '25', time: '5 Min', kcal: '200 Kcal',
+        desc: 'Refresco frío de 1 litro. <em>Ideal para compartir.</em>',
+        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['1 Litro'], prices: [2],
+        addons: []
+    },
+    {
+        id: 14,
+        name: 'Refresco 1½ Litro',
+        category: 'bebida',
+        rating: 4.8, reviews: '18', time: '5 Min', kcal: '280 Kcal',
+        desc: 'Refresco frío de litro y medio. <em>Para toda la familia.</em>',
+        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['1½ Litro'], prices: [2.5],
+        addons: []
+    },
+    {
+        id: 15,
+        name: 'Refresco 2 Litros',
+        category: 'bebida',
+        rating: 4.8, reviews: '22', time: '5 Min', kcal: '380 Kcal',
+        desc: 'Refresco frío de 2 litros. <em>Para toda la familia.</em>',
+        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['2 Litros'], prices: [3],
+        addons: []
+    },
 ];
 
 /* ══════════════════════════════════════════
