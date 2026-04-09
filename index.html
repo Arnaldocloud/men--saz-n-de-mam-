@@ -750,6 +750,12 @@
                     </div>
                     <span class="cat-label">Burgers</span>
                 </div>
+                <div class="cat-item" onclick="setCategory(this,'promo')">
+                    <div class="cat-circle" style="border-color:var(--orange);background:#1f1200;">
+                        <img src="img_promo.jpeg" alt="Promos" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <span class="cat-label" style="color:var(--orange);font-weight:700;">🔥 Promos</span>
+                </div>
                 <div class="cat-item" onclick="setCategory(this,'bebida')">
                     <div class="cat-circle">
                         <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=200&q=80" alt="Bebidas">
@@ -1047,6 +1053,59 @@ const MENU = [
             { name: 'Chorizo Extra',   price: 2 },
             { name: 'Chuleta Extra',   price: 2 },
             { name: 'Queso Extra',     price: 1 },
+        ]
+    },
+    // ── PROMOS ──
+    {
+        id: 16,
+        name: 'Promo Mixta',
+        category: 'promo',
+        rating: 5.0, reviews: '91', time: '15–20 Min', kcal: '700 Kcal',
+        desc: 'Hamburguesa mixta al mejor precio. <em>¡La favorita de la promoción!</em>',
+        img: 'img_promo.jpeg',
+        sizes: ['Estándar'], prices: [5.5],
+        addons: [
+            { name: 'Tocineta Extra', price: 1 },
+            { name: 'Queso Extra',    price: 1 },
+        ]
+    },
+    {
+        id: 17,
+        name: 'Promo Chuleta',
+        category: 'promo',
+        rating: 4.9, reviews: '78', time: '15–20 Min', kcal: '680 Kcal',
+        desc: 'Hamburguesa de chuleta en promoción. <em>Sabor premium a precio especial.</em>',
+        img: 'img_chuletazo.jpeg',
+        sizes: ['Estándar'], prices: [5.5],
+        addons: [
+            { name: 'Tocineta Extra', price: 1 },
+            { name: 'Queso Extra',    price: 1 },
+        ]
+    },
+    {
+        id: 18,
+        name: 'Promo Carne Redonda',
+        category: 'promo',
+        rating: 4.8, reviews: '65', time: '15–20 Min', kcal: '600 Kcal',
+        desc: 'Hamburguesa de carne redonda en promoción. <em>Clásica y deliciosa.</em>',
+        img: 'img_chuleta.jpeg',
+        sizes: ['Estándar'], prices: [4],
+        addons: [
+            { name: 'Tocineta Extra', price: 1 },
+            { name: 'Queso Extra',    price: 1 },
+        ]
+    },
+    {
+        id: 19,
+        name: 'Promo Pollo',
+        category: 'promo',
+        rating: 4.8, reviews: '59', time: '15–20 Min', kcal: '520 Kcal',
+        desc: 'Hamburguesa de pollo en promoción. <em>Ligera y sabrosa.</em>',
+        img: 'img_mixta.jpeg',
+        sizes: ['Estándar'], prices: [3.5],
+        addons: [
+            { name: 'Queso Extra',    price: 1 },
+            { name: 'Tocineta Extra', price: 1 },
         ]
     },
     // ── REFRESCOS ──
