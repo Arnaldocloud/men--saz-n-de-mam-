@@ -481,9 +481,11 @@
 
         /* Sticky bottom – product */
         #prod-sticky {
-            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            position: fixed;
+            bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+            left: 50%; transform: translateX(-50%);
             width: 100%; max-width: 430px;
-            padding: 16px 20px 30px;
+            padding: 16px 20px 12px;
             background: linear-gradient(to top, var(--bg) 65%, transparent);
             z-index: 150;
             display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -500,7 +502,7 @@
         /* ══════════════════════════════
            SCREEN 4 – CART
         ══════════════════════════════ */
-        #screen-cart { padding-bottom: 130px; }
+        #screen-cart { padding-bottom: 210px; }
 
         .cart-header {
             padding: 52px 20px 20px;
@@ -599,9 +601,11 @@
 
         /* Cart checkout sticky */
         #cart-sticky {
-            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            position: fixed;
+            bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+            left: 50%; transform: translateX(-50%);
             width: 100%; max-width: 430px;
-            padding: 16px 20px 30px;
+            padding: 16px 20px 12px;
             background: linear-gradient(to top, var(--bg) 65%, transparent);
             z-index: 150;
         }
