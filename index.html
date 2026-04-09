@@ -762,6 +762,24 @@
                     </div>
                     <span class="cat-label" style="color:var(--orange);font-weight:700;">🔥 Promos</span>
                 </div>
+                <div class="cat-item" onclick="setCategory(this,'normal')">
+                    <div class="cat-circle">
+                        <img src="img_llanerita.jpeg" alt="Pan Normal">
+                    </div>
+                    <span class="cat-label">Pan Normal</span>
+                </div>
+                <div class="cat-item" onclick="setCategory(this,'rueda')">
+                    <div class="cat-circle">
+                        <img src="img_combomixto.jpeg" alt="Ruedas">
+                    </div>
+                    <span class="cat-label">Ruedas</span>
+                </div>
+                <div class="cat-item" onclick="setCategory(this,'papas')">
+                    <div class="cat-circle">
+                        <img src="img_mixta.jpeg" alt="Papas">
+                    </div>
+                    <span class="cat-label">Papas</span>
+                </div>
                 <div class="cat-item" onclick="setCategory(this,'bebida')">
                     <div class="cat-circle">
                         <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=200&q=80" alt="Bebidas">
@@ -1193,6 +1211,178 @@ const MENU = [
         addons: [
             { name: 'Queso Extra',    price: 1 },
             { name: 'Tocineta Extra', price: 1 },
+        ]
+    },
+    // ── PAN NORMAL ──
+    {
+        id: 30,
+        name: 'Normal Carne Redonda',
+        category: 'normal',
+        rating: 4.7, reviews: '31', time: '10–15 Min', kcal: '480 Kcal',
+        desc: 'Carne redonda, lechuga, huevo, tomate, jamón, queso mozzarella, papitas ralladas y salsas.',
+        img: 'img_chuleta.jpeg',
+        sizes: ['Estándar'], prices: [7.5],
+        addons: [
+            { name: 'Tocineta Extra', price: 1 },
+            { name: 'Queso Extra',    price: 1 },
+        ]
+    },
+    {
+        id: 31,
+        name: 'Normal Pollo',
+        category: 'normal',
+        rating: 4.7, reviews: '28', time: '10–15 Min', kcal: '450 Kcal',
+        desc: 'Pollo crispy, lechuga, huevo, tomate, jamón, queso mozzarella, papitas ralladas y salsas.',
+        img: 'img_mixta.jpeg',
+        sizes: ['Estándar'], prices: [8],
+        addons: [
+            { name: 'Queso Extra',    price: 1 },
+            { name: 'Tocineta Extra', price: 1 },
+        ]
+    },
+    {
+        id: 32,
+        name: 'Normal Carne Mechada',
+        category: 'normal',
+        rating: 4.8, reviews: '33', time: '10–15 Min', kcal: '500 Kcal',
+        desc: 'Carne mechada, lechuga, huevo, tomate, jamón, queso mozzarella, papitas ralladas y salsas.',
+        img: 'img_mechada.jpeg',
+        sizes: ['Estándar'], prices: [9],
+        addons: [
+            { name: 'Queso Extra',    price: 1 },
+            { name: 'Tocineta Extra', price: 1 },
+        ]
+    },
+    {
+        id: 33,
+        name: 'Normal Mixta de Pollo',
+        category: 'normal',
+        rating: 4.8, reviews: '26', time: '10–15 Min', kcal: '520 Kcal',
+        desc: 'Carne redonda y pollo, lechuga, huevo, tomate, jamón, queso mozzarella, papitas ralladas y salsas.',
+        img: 'img_combomixto.jpeg',
+        sizes: ['Estándar'], prices: [10],
+        addons: [
+            { name: 'Pollo Extra',    price: 2 },
+            { name: 'Queso Extra',    price: 1 },
+        ]
+    },
+    {
+        id: 34,
+        name: 'Normal Ligadita',
+        category: 'normal',
+        rating: 4.9, reviews: '39', time: '10–15 Min', kcal: '580 Kcal',
+        desc: 'Carne picada y pollo, lechuga, huevo, tomate, jamón, queso mozzarella, papitas ralladas y salsas.',
+        img: 'img_ligadito.jpeg',
+        sizes: ['Estándar'], prices: [11.5],
+        addons: [
+            { name: 'Pollo Extra',    price: 2 },
+            { name: 'Queso Extra',    price: 1 },
+        ]
+    },
+    {
+        id: 35,
+        name: 'La Chabochita',
+        category: 'normal',
+        rating: 4.8, reviews: '22', time: '10–15 Min', kcal: '540 Kcal',
+        desc: 'Combinación especial de carnes, lechuga, huevo, tomate, jamón, queso mozzarella, papitas ralladas y salsas.',
+        img: 'img_chuletazo.jpeg',
+        sizes: ['Estándar'], prices: [11],
+        addons: [
+            { name: 'Tocineta Extra', price: 1 },
+            { name: 'Queso Extra',    price: 1 },
+        ]
+    },
+    // ── RUEDAS FAMILIARES ──
+    {
+        id: 40,
+        name: 'Rueda Normal',
+        category: 'rueda',
+        rating: 4.9, reviews: '18', time: '25–35 Min', kcal: '1800 Kcal',
+        desc: 'Rueda familiar de hamburguesa. <em>Incluye Refresco 2L.</em>',
+        img: 'img_combomixto.jpeg',
+        sizes: ['Familiar'], prices: [35],
+        addons: []
+    },
+    {
+        id: 41,
+        name: 'Rueda Mixta',
+        category: 'rueda',
+        rating: 4.9, reviews: '24', time: '25–35 Min', kcal: '2100 Kcal',
+        desc: 'Rueda familiar mixta (carne y pollo). <em>Incluye Refresco 2L.</em>',
+        img: 'img_mixta.jpeg',
+        sizes: ['Familiar'], prices: [45],
+        addons: []
+    },
+    {
+        id: 42,
+        name: 'Rueda Saperoco',
+        category: 'rueda',
+        rating: 5.0, reviews: '31', time: '25–35 Min', kcal: '2400 Kcal',
+        desc: 'Rueda familiar Saperoco, cargada de todo. <em>Incluye Refresco 2L.</em>',
+        img: 'img_supercartelua.jpeg',
+        sizes: ['Familiar'], prices: [55],
+        addons: []
+    },
+    {
+        id: 43,
+        name: 'Rueda Súper Carteluda',
+        category: 'rueda',
+        rating: 5.0, reviews: '42', time: '25–35 Min', kcal: '2800 Kcal',
+        desc: 'La rueda más completa: carne, pollo, chorizo, chuleta y mucho más. <em>Incluye Refresco 2L.</em>',
+        img: 'img_chuletazo.jpeg',
+        sizes: ['Familiar'], prices: [60],
+        addons: []
+    },
+    // ── PAPAS / SALCHIPAPA ──
+    {
+        id: 50,
+        name: 'Papitas Fritas',
+        category: 'papas',
+        rating: 4.7, reviews: '45', time: '10–15 Min', kcal: '350 Kcal',
+        desc: 'Papitas fritas crujientes con salsa, salchicha y queso.',
+        img: 'img_mixta.jpeg',
+        sizes: ['Porción'], prices: [5],
+        addons: [
+            { name: 'Queso Extra', price: 1 },
+        ]
+    },
+    {
+        id: 51,
+        name: 'Salchipapa',
+        category: 'papas',
+        rating: 4.8, reviews: '62', time: '10–15 Min', kcal: '550 Kcal',
+        desc: 'Papitas fritas con salchicha. <em>Clásica y deliciosa.</em>',
+        img: 'img_mechada.jpeg',
+        sizes: ['Porción'], prices: [10],
+        addons: [
+            { name: 'Queso Extra',    price: 1 },
+            { name: 'Tocineta Extra', price: 1 },
+        ]
+    },
+    {
+        id: 52,
+        name: 'Salchipapa con Pollo Crispy',
+        category: 'papas',
+        rating: 4.9, reviews: '54', time: '10–15 Min', kcal: '680 Kcal',
+        desc: 'Papitas fritas con salchicha y pollo crispy.',
+        img: 'img_ligadito.jpeg',
+        sizes: ['Porción'], prices: [12],
+        addons: [
+            { name: 'Queso Extra',    price: 1 },
+            { name: 'Pollo Extra',    price: 2 },
+        ]
+    },
+    {
+        id: 53,
+        name: 'Salchipapa Completa',
+        category: 'papas',
+        rating: 5.0, reviews: '77', time: '10–15 Min', kcal: '850 Kcal',
+        desc: '4 salchichas, carne picada, pollo crispy, chorizo y queso llanero. <em>¡La más completa!</em>',
+        img: 'img_chuletazo.jpeg',
+        sizes: ['Porción'], prices: [13],
+        addons: [
+            { name: 'Chorizo Extra',  price: 2 },
+            { name: 'Queso Extra',    price: 1 },
         ]
     },
     // ── REFRESCOS ──
