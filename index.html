@@ -750,9 +750,15 @@
                     </div>
                     <span class="cat-label">Burgers</span>
                 </div>
+                <div class="cat-item" onclick="setCategory(this,'pizza')">
+                    <div class="cat-circle">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80" alt="Pizzas">
+                    </div>
+                    <span class="cat-label">Pizzas</span>
+                </div>
                 <div class="cat-item" onclick="setCategory(this,'promo')">
-                    <div class="cat-circle" style="border-color:var(--orange);background:#1f1200;">
-                        <img src="img_promo.jpeg" alt="Promos" style="width:100%;height:100%;object-fit:cover;">
+                    <div class="cat-circle" style="border-color:var(--orange);">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=200&q=80" alt="Promos">
                     </div>
                     <span class="cat-label" style="color:var(--orange);font-weight:700;">🔥 Promos</span>
                 </div>
@@ -1053,6 +1059,87 @@ const MENU = [
             { name: 'Chorizo Extra',   price: 2 },
             { name: 'Chuleta Extra',   price: 2 },
             { name: 'Queso Extra',     price: 1 },
+        ]
+    },
+    // ── PIZZAS ──
+    {
+        id: 20,
+        name: 'Pizza Clásica',
+        category: 'pizza',
+        rating: 4.9, reviews: '74', time: '20–30 Min', kcal: '780 Kcal',
+        desc: 'Salsa napolo, queso mozzarella, jamón, tocineta, pollo, maíz. <em>Picada en 8 pedazos.</em>',
+        img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Personal', 'Mediana', 'Familiar'],
+        prices: [8.5, 12.5, 15],
+        addons: [
+            { name: 'Champiñones y Maíz', price: 1 },
+            { name: 'Chorizo/Ahumado',    price: 2 },
+            { name: 'Pepperoni',          price: 2 },
+            { name: 'Tocineta Extra',     price: 2 },
+        ]
+    },
+    {
+        id: 21,
+        name: 'Pizza Chabocha',
+        category: 'pizza',
+        rating: 4.9, reviews: '58', time: '20–30 Min', kcal: '820 Kcal',
+        desc: 'Salsa napolo, pollo y queso mozzarella, jamón, tocineta, mazorca, maíz. <em>Picada en 8 pedazos.</em>',
+        img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Personal', 'Mediana', 'Familiar'],
+        prices: [9.5, 15, 20.5],
+        addons: [
+            { name: 'Champiñones y Maíz', price: 1 },
+            { name: 'Chorizo/Ahumado',    price: 2 },
+            { name: 'Pepperoni',          price: 2 },
+            { name: 'Tocineta Extra',     price: 2 },
+        ]
+    },
+    {
+        id: 22,
+        name: 'Pizza Saperoco',
+        category: 'pizza',
+        rating: 5.0, reviews: '66', time: '20–30 Min', kcal: '900 Kcal',
+        desc: 'Salsa napolo, queso mozzarella, jamón, tocineta, pollo, maíz y mucho más. <em>Picada en 8 pedazos.</em>',
+        img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Personal', 'Mediana', 'Familiar'],
+        prices: [13, 20, 25],
+        addons: [
+            { name: 'Champiñones y Maíz', price: 1 },
+            { name: 'Chorizo/Ahumado',    price: 2 },
+            { name: 'Pepperoni',          price: 2 },
+            { name: 'Tocineta Extra',     price: 2 },
+        ]
+    },
+    {
+        id: 23,
+        name: 'Pizza SuperCartelua',
+        category: 'pizza',
+        rating: 5.0, reviews: '89', time: '20–30 Min', kcal: '1050 Kcal',
+        desc: 'Salsa napolo, tocineta, chorizo, champiñones, pimentón, maíz. <em>¡La más completa! Picada en 8 pedazos.</em>',
+        img: 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Personal', 'Mediana', 'Familiar'],
+        prices: [14.5, 23, 28],
+        addons: [
+            { name: 'Champiñones y Maíz', price: 1 },
+            { name: 'Chorizo/Ahumado',    price: 2 },
+            { name: 'Pepperoni',          price: 2 },
+            { name: 'Tocineta Extra',     price: 2 },
+        ]
+    },
+    {
+        id: 24,
+        name: 'Pizza La Peperona',
+        category: 'pizza',
+        rating: 4.9, reviews: '47', time: '20–30 Min', kcal: '860 Kcal',
+        desc: 'Salsa napolo, tocineta, pepperoni o chorizo, queso mozzarella, jamón, pimentón, maíz. <em>Picada en 8 pedazos.</em>',
+        img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Personal', 'Mediana', 'Familiar'],
+        prices: [9.2, 15, 19],
+        addons: [
+            { name: 'Champiñones y Maíz', price: 1 },
+            { name: 'Chorizo/Ahumado',    price: 2 },
+            { name: 'Pepperoni',          price: 2 },
+            { name: 'Tocineta Extra',     price: 2 },
         ]
     },
     // ── PROMOS ──
