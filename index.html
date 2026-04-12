@@ -1523,7 +1523,15 @@ const SLOTS3 = [
     { size:70, top:6,  css:'right:10%' },
 ];
 
-const CATS_PER_PAGE = 5;
+/* Slot positions for a 4-item page (semi-circle/arced layout) */
+const SLOTS4 = [
+    { size:74, top:6,  css:'left:6%'   },
+    { size:74, top:62, css:'left:28%'  },
+    { size:74, top:62, css:'right:28%' },
+    { size:74, top:6,  css:'right:6%'  },
+];
+
+const CATS_PER_PAGE = 4;
 let catPageIdx    = 0;
 let activeCategory = 'all';
 
@@ -1535,7 +1543,11 @@ function initCats() {
 
     for (let p = 0; p < totalPages; p++) {
         const slice = CATS.slice(p * CATS_PER_PAGE, (p + 1) * CATS_PER_PAGE);
-        const slots = slice.length >= 5 ? SLOTS5 : SLOTS3;
+    // choose slot template depending on how many items are on the page
+    const slots = slice.length === 5 ? SLOTS5
+            : slice.length === 4 ? SLOTS4
+            : slice.length === 3 ? SLOTS3
+            : (slice.length > 0 ? SLOTS4.slice(0, slice.length) : SLOTS3);
         const pg    = document.createElement('div');
         pg.className = 'cat-pg ' + (p === 0 ? 'cp-cur' : 'cp-next');
         pg.id = 'cat-pg-' + p;
