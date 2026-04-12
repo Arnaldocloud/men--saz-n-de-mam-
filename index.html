@@ -239,49 +239,67 @@
             flex-shrink: 0;
         }
 
-        /* Categories */
-        .cat-header {
-            display: flex; align-items: center; gap: 10px;
-            padding: 24px 20px 14px;
-        }
-        .cat-arrow {
-            width: 28px; height: 28px; border-radius: 50%;
-            background: var(--card); border: none; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--muted); flex-shrink: 0; font-size: 12px;
-            transition: background .2s;
-        }
-        .cat-arrow:hover { background: var(--card2); color: var(--text); }
+        /* ══ BUBBLE CATEGORIES ══ */
+        .cat-section { padding: 16px 0 6px; }
 
-        .cat-scroll {
-            display: flex; gap: 18px; overflow-x: auto; flex: 1;
+        .cat-pg-ctrl {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; margin-bottom: 10px;
         }
-        .cat-item {
-            display: flex; flex-direction: column;
-            align-items: center; gap: 7px;
-            cursor: pointer; flex-shrink: 0;
+        .cat-pg-dot {
+            height: 6px; border-radius: 3px;
+            background: var(--card2); transition: all .35s;
+        }
+        .cat-pg-dot.active { width: 22px; background: var(--orange); }
+        .cat-pg-dot:not(.active) { width: 7px; }
+
+        .cat-viewport {
+            position: relative; height: 175px; overflow: hidden;
+        }
+        .cat-pg {
+            position: absolute; inset: 0;
+            transition: transform .42s cubic-bezier(.25,.8,.25,1), opacity .35s;
+        }
+        .cat-pg.cp-cur  { transform: translateX(0);     opacity: 1; pointer-events: auto; }
+        .cat-pg.cp-prev { transform: translateX(-108%);  opacity: 0; pointer-events: none; }
+        .cat-pg.cp-next { transform: translateX(108%);   opacity: 0; pointer-events: none; }
+
+        .cb {
+            position: absolute; display: flex; flex-direction: column;
+            align-items: center; gap: 6px; cursor: pointer;
             transition: transform .2s;
         }
-        .cat-item:active { transform: scale(.93); }
-        .cat-circle {
-            width: 62px; height: 62px; border-radius: 50%;
-            overflow: hidden; background: var(--card);
-            border: 2.5px solid transparent;
-            transition: border-color .25s, transform .25s;
-            display: flex; align-items: center; justify-content: center;
+        .cb:active { transform: scale(.88); }
+        .cb-img {
+            border-radius: 50%; overflow: hidden; background: var(--card2);
+            border: 2.5px solid var(--card2); flex-shrink: 0;
+            box-shadow: 0 0 0 4px var(--card);
+            transition: border-color .25s, box-shadow .25s;
         }
-        .cat-circle img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-        .cat-item.active .cat-circle {
+        .cb-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cb.active .cb-img {
             border-color: var(--orange);
-            transform: scale(1.08);
+            box-shadow: 0 0 0 4px rgba(249,115,22,.25);
         }
-        .cat-label {
-            font-size: 11px; font-weight: 500; color: var(--muted);
-            transition: color .25s;
+        .cb-lbl {
+            font-size: 10px; font-weight: 600; color: var(--muted);
+            text-align: center; white-space: nowrap;
+            transition: color .25s; max-width: 76px;
+            overflow: hidden; text-overflow: ellipsis;
         }
-        .cat-item.active .cat-label { color: var(--orange); font-weight: 700; }
+        .cb.active .cb-lbl { color: var(--orange); font-weight: 800; }
+
+        .cat-arr {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 28px; height: 28px; border-radius: 50%;
+            background: rgba(37,37,37,.9); border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--muted); z-index: 20; font-size: 16px;
+            transition: background .2s, color .2s;
+        }
+        .cat-arr:hover { background: var(--orange); color: #fff; }
+        .cat-arr-l { left: 8px; }
+        .cat-arr-r { right: 8px; }
 
         /* Featured section */
         .feat-header {
@@ -734,60 +752,14 @@
             </button>
         </div>
 
-        <!-- Categories -->
-        <div class="cat-header">
-            <button class="cat-arrow" onclick="scrollCats(-1)">&#8249;</button>
-            <div class="cat-scroll sh" id="cat-scroll">
-                <div class="cat-item active" onclick="setCategory(this,'all')">
-                    <div class="cat-circle">
-                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=200&q=80" alt="Todos">
-                    </div>
-                    <span class="cat-label">Todos</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'burger')">
-                    <div class="cat-circle">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80" alt="Burgers">
-                    </div>
-                    <span class="cat-label">Burgers</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'pizza')">
-                    <div class="cat-circle">
-                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80" alt="Pizzas">
-                    </div>
-                    <span class="cat-label">Pizzas</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'promo')">
-                    <div class="cat-circle" style="border-color:var(--orange);">
-                        <img src="img_promo.jpeg" alt="Promos">
-                    </div>
-                    <span class="cat-label" style="color:var(--orange);font-weight:700;">🔥 Promos</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'normal')">
-                    <div class="cat-circle">
-                        <img src="img_llanerita.jpeg" alt="Pan Normal">
-                    </div>
-                    <span class="cat-label">Pan Normal</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'rueda')">
-                    <div class="cat-circle">
-                        <img src="img_combomixto.jpeg" alt="Ruedas">
-                    </div>
-                    <span class="cat-label">Ruedas</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'papas')">
-                    <div class="cat-circle">
-                        <img src="img_mixta.jpeg" alt="Papas">
-                    </div>
-                    <span class="cat-label">Papas</span>
-                </div>
-                <div class="cat-item" onclick="setCategory(this,'bebida')">
-                    <div class="cat-circle">
-                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=200&q=80" alt="Bebidas">
-                    </div>
-                    <span class="cat-label">Bebidas</span>
-                </div>
+        <!-- Categories Bubbles -->
+        <div class="cat-section">
+            <div class="cat-pg-ctrl" id="cat-dots"></div>
+            <div class="cat-viewport" id="cat-viewport">
+                <!-- pages injected by JS -->
+                <button class="cat-arr cat-arr-l" onclick="moveCatPage(-1)">&#8249;</button>
+                <button class="cat-arr cat-arr-r" onclick="moveCatPage(1)">&#8250;</button>
             </div>
-            <button class="cat-arrow" onclick="scrollCats(1)">&#8250;</button>
         </div>
 
         <!-- Featured -->
@@ -1180,7 +1152,7 @@ const MENU = [
         category: 'promo',
         rating: 4.9, reviews: '78', time: '15–20 Min', kcal: '680 Kcal',
         desc: 'Hamburguesa de chuleta en promoción. <em>Sabor premium a precio especial.</em>',
-        img: 'img_chuleta.jpeg',        
+        img: 'img_chuleta.jpeg',
         sizes: ['Estándar'], prices: [5.5],
         addons: [
             { name: 'Tocineta Extra', price: 1 },
@@ -1522,15 +1494,96 @@ function filterSearch(q) {
     renderGrid(q ? MENU.filter(i => i.name.toLowerCase().includes(lq) || i.desc.toLowerCase().includes(lq)) : MENU);
 }
 
-function setCategory(el, cat) {
-    document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    renderGrid(cat === 'all' ? MENU : MENU.filter(i => i.category === cat));
+/* ══════════════════════════════════════════
+   BUBBLE CATEGORIES
+══════════════════════════════════════════ */
+const CATS = [
+    { key:'all',    label:'Todos',      img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=200&q=80' },
+    { key:'burger', label:'Burgers',    img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80' },
+    { key:'pizza',  label:'Pizzas',     img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80' },
+    { key:'promo',  label:'🔥 Promos',  img:'img_promo.jpeg' },
+    { key:'normal', label:'Pan Normal', img:'img_llanerita.jpeg' },
+    { key:'rueda',  label:'Ruedas',     img:'img_combomixto.jpeg' },
+    { key:'papas',  label:'Papas',      img:'img_mixta.jpeg' },
+    { key:'bebida', label:'Bebidas',    img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=200&q=80' },
+];
+
+/* Slot positions for a 5-item page (scattered bubble layout) — todos 70px */
+const SLOTS5 = [
+    { size:70, top:6,  css:'left:6%'   },
+    { size:70, top:82,  css:'left:20%'  },
+    { size:70, top:92,  css:'left:50%;transform:translateX(-50%)' },
+    { size:70, top:82,  css:'right:20%' },
+    { size:70, top:6,   css:'right:6%'  },
+];
+/* Slot positions for a 3-item page */
+const SLOTS3 = [
+    { size:70, top:6,  css:'left:10%'  },
+    { size:70, top:46,  css:'left:50%;transform:translateX(-50%)' },
+    { size:70, top:6,  css:'right:10%' },
+];
+
+const CATS_PER_PAGE = 5;
+let catPageIdx    = 0;
+let activeCategory = 'all';
+
+function initCats() {
+    const totalPages = Math.ceil(CATS.length / CATS_PER_PAGE);
+    const viewport   = $('cat-viewport');
+    const dotsEl     = $('cat-dots');
+    const leftArr    = viewport.querySelector('.cat-arr-l');
+
+    for (let p = 0; p < totalPages; p++) {
+        const slice = CATS.slice(p * CATS_PER_PAGE, (p + 1) * CATS_PER_PAGE);
+        const slots = slice.length >= 5 ? SLOTS5 : SLOTS3;
+        const pg    = document.createElement('div');
+        pg.className = 'cat-pg ' + (p === 0 ? 'cp-cur' : 'cp-next');
+        pg.id = 'cat-pg-' + p;
+
+        slice.forEach((cat, i) => {
+            const s    = slots[i];
+            const isOn = cat.key === activeCategory;
+            const el   = document.createElement('div');
+            el.className = 'cb' + (isOn ? ' active' : '');
+            el.id = 'cb-' + cat.key;
+            el.style.cssText = s.css + ';top:' + s.top + 'px;';
+            el.setAttribute('onclick', `selectCategory('${cat.key}')`);
+            el.innerHTML = `
+                <div class="cb-img" style="width:${s.size}px;height:${s.size}px;">
+                    <img src="${cat.img}" alt="${cat.label}" loading="lazy">
+                </div>
+                <span class="cb-lbl">${cat.label}</span>
+            `;
+            pg.appendChild(el);
+        });
+
+        viewport.insertBefore(pg, leftArr);
+
+        /* dot */
+        const dot = document.createElement('span');
+        dot.className = 'cat-pg-dot' + (p === 0 ? ' active' : '');
+        dot.id = 'cat-dot-' + p;
+        dotsEl.appendChild(dot);
+    }
 }
 
-function scrollCats(dir) {
-    const el = $('cat-scroll');
-    el.scrollBy({ left: dir * 100, behavior: 'smooth' });
+function moveCatPage(dir) {
+    const total  = Math.ceil(CATS.length / CATS_PER_PAGE);
+    const oldIdx = catPageIdx;
+    catPageIdx   = (catPageIdx + dir + total) % total;
+
+    $('cat-pg-' + oldIdx).className  = 'cat-pg ' + (dir > 0 ? 'cp-prev' : 'cp-next');
+    $('cat-pg-' + catPageIdx).className = 'cat-pg cp-cur';
+    $('cat-dot-' + oldIdx).classList.remove('active');
+    $('cat-dot-' + catPageIdx).classList.add('active');
+}
+
+function selectCategory(key) {
+    document.querySelectorAll('.cb').forEach(el => el.classList.remove('active'));
+    const el = $('cb-' + key);
+    if (el) el.classList.add('active');
+    activeCategory = key;
+    renderGrid(key === 'all' ? MENU : MENU.filter(i => i.category === key));
 }
 
 /* ══════════════════════════════════════════
@@ -1833,6 +1886,7 @@ function toast(msg) {
 /* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
+initCats();
 renderGrid(MENU);
 </script>
 </body>
