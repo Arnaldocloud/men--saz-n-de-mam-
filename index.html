@@ -254,15 +254,20 @@
         .cat-pg-dot:not(.active) { width: 7px; }
 
         .cat-viewport {
-            position: relative; height: 175px; overflow: hidden;
+            position: relative; height: 175px;
+            overflow-x: auto; overflow-y: hidden;
+            display: flex; gap: 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
         .cat-pg {
-            position: absolute; inset: 0;
-            transition: transform .42s cubic-bezier(.25,.8,.25,1), opacity .35s;
+            position: relative; flex: 0 0 100%; height: 100%;
+            transition: opacity .25s ease, transform .25s ease;
+            scroll-snap-align: center;
         }
-        .cat-pg.cp-cur  { transform: translateX(0);     opacity: 1; pointer-events: auto; }
-        .cat-pg.cp-prev { transform: translateX(-108%);  opacity: 0; pointer-events: none; }
-        .cat-pg.cp-next { transform: translateX(108%);   opacity: 0; pointer-events: none; }
+        .cat-pg.cp-cur  { opacity: 1; pointer-events: auto; }
+        .cat-pg.cp-prev { opacity: .0; pointer-events: none; }
+        .cat-pg.cp-next { opacity: .0; pointer-events: none; }
 
         .cb {
             position: absolute; display: flex; flex-direction: column;
@@ -297,6 +302,8 @@
             color: var(--muted); z-index: 20; font-size: 16px;
             transition: background .2s, color .2s;
         }
+    /* when using scroll, hide the arrow controls */
+    .cat-arr { display: none; }
         .cat-arr:hover { background: var(--orange); color: #fff; }
         .cat-arr-l { left: 8px; }
         .cat-arr-r { right: 8px; }
@@ -1539,15 +1546,16 @@ function initCats() {
     const totalPages = Math.ceil(CATS.length / CATS_PER_PAGE);
     const viewport   = $('cat-viewport');
     const dotsEl     = $('cat-dots');
-    const leftArr    = viewport.querySelector('.cat-arr-l');
+    // clear existing content (in case of re-init)
+    viewport.querySelectorAll('.cat-pg').forEach(n => n.remove());
+    dotsEl.innerHTML = '';
 
     for (let p = 0; p < totalPages; p++) {
         const slice = CATS.slice(p * CATS_PER_PAGE, (p + 1) * CATS_PER_PAGE);
-    // choose slot template depending on how many items are on the page
-    const slots = slice.length === 5 ? SLOTS5
-            : slice.length === 4 ? SLOTS4
-            : slice.length === 3 ? SLOTS3
-            : (slice.length > 0 ? SLOTS4.slice(0, slice.length) : SLOTS3);
+        const slots = slice.length === 5 ? SLOTS5
+                    : slice.length === 4 ? SLOTS4
+                    : slice.length === 3 ? SLOTS3
+                    : (slice.length > 0 ? SLOTS4.slice(0, slice.length) : SLOTS3);
         const pg    = document.createElement('div');
         pg.className = 'cat-pg ' + (p === 0 ? 'cp-cur' : 'cp-next');
         pg.id = 'cat-pg-' + p;
@@ -1558,7 +1566,7 @@ function initCats() {
             const el   = document.createElement('div');
             el.className = 'cb' + (isOn ? ' active' : '');
             el.id = 'cb-' + cat.key;
-            el.style.cssText = s.css + ';top:' + s.top + 'px;';
+            el.style.cssText = s.css + ';top:' + s.top + 'px;position:absolute;';
             el.setAttribute('onclick', `selectCategory('${cat.key}')`);
             el.innerHTML = `
                 <div class="cb-img" style="width:${s.size}px;height:${s.size}px;">
@@ -1569,7 +1577,7 @@ function initCats() {
             pg.appendChild(el);
         });
 
-        viewport.insertBefore(pg, leftArr);
+        viewport.appendChild(pg);
 
         /* dot */
         const dot = document.createElement('span');
@@ -1577,17 +1585,36 @@ function initCats() {
         dot.id = 'cat-dot-' + p;
         dotsEl.appendChild(dot);
     }
+
+    // sync dots and active state when user scrolls
+    let isScrolling = false;
+    viewport.addEventListener('scroll', () => {
+        if (isScrolling) return;
+        window.requestAnimationFrame(() => {
+            const pageWidth = viewport.offsetWidth;
+            const idx = Math.round(viewport.scrollLeft / pageWidth);
+            updateCatPage(idx);
+        });
+    });
+
+    // helper to set active page/dot
+    function updateCatPage(idx) {
+        for (let i = 0; i < totalPages; i++) {
+            const pg = $('cat-pg-' + i);
+            pg.className = 'cat-pg ' + (i === idx ? 'cp-cur' : 'cp-next');
+            $('cat-dot-' + i).classList.toggle('active', i === idx);
+        }
+        catPageIdx = idx;
+    }
 }
 
 function moveCatPage(dir) {
     const total  = Math.ceil(CATS.length / CATS_PER_PAGE);
     const oldIdx = catPageIdx;
     catPageIdx   = (catPageIdx + dir + total) % total;
-
-    $('cat-pg-' + oldIdx).className  = 'cat-pg ' + (dir > 0 ? 'cp-prev' : 'cp-next');
-    $('cat-pg-' + catPageIdx).className = 'cat-pg cp-cur';
-    $('cat-dot-' + oldIdx).classList.remove('active');
-    $('cat-dot-' + catPageIdx).classList.add('active');
+    const viewport = $('cat-viewport');
+    const pageWidth = viewport.offsetWidth;
+    viewport.scrollTo({ left: catPageIdx * pageWidth, behavior: 'smooth' });
 }
 
 function selectCategory(key) {
@@ -1596,6 +1623,13 @@ function selectCategory(key) {
     if (el) el.classList.add('active');
     activeCategory = key;
     renderGrid(key === 'all' ? MENU : MENU.filter(i => i.category === key));
+    // ensure the page that contains this category becomes visible
+    const idx = CATS.findIndex(c => c.key === key);
+    if (idx >= 0) {
+        const page = Math.floor(idx / CATS_PER_PAGE);
+        const viewport = $('cat-viewport');
+        viewport.scrollTo({ left: page * viewport.offsetWidth, behavior: 'smooth' });
+    }
 }
 
 /* ══════════════════════════════════════════
