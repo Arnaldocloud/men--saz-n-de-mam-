@@ -316,11 +316,10 @@
             color: var(--muted); z-index: 20; font-size: 16px;
             transition: background .2s, color .2s;
         }
-    /* when using scroll, hide the arrow controls */
-    .cat-arr { display: none; }
         .cat-arr:hover { background: var(--orange); color: #fff; }
-        .cat-arr-l { left: 8px; }
-        .cat-arr-r { right: 8px; }
+        .cat-arr-l { left: 4px; }
+        .cat-arr-r { right: 4px; }
+        .cat-section { position: relative; }
 
         /* Featured section */
         .feat-header {
@@ -786,9 +785,10 @@
             <div class="cat-pg-ctrl" id="cat-dots"></div>
             <div class="cat-viewport" id="cat-viewport">
                 <!-- pages injected by JS -->
-                <button class="cat-arr cat-arr-l" onclick="moveCatPage(-1)">&#8249;</button>
-                <button class="cat-arr cat-arr-r" onclick="moveCatPage(1)">&#8250;</button>
             </div>
+            <!-- Fuera de la franja: dentro se desplazaban con ella -->
+            <button class="cat-arr cat-arr-l" onclick="moveCatPage(-1)" aria-label="Categorías anteriores">&#8249;</button>
+            <button class="cat-arr cat-arr-r" onclick="moveCatPage(1)" aria-label="Más categorías">&#8250;</button>
         </div>
 
         <!-- Featured -->
@@ -1050,6 +1050,59 @@ const MENU = [
             { name: 'Carne mechada', price: 4.65 },
         ]
     },
+    // ── PIZZAS ──
+    {
+        id: 22,
+        name: 'Pizza Clásica',
+        category: 'pizza',
+        time: '20–30 Min',
+        desc: 'Salsa napole, queso mozzarella, jamón y pimentón. 8 pedazos.',
+        img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [9, 12.8, 18.15],
+        addons: [
+            { name: 'Champiñones o maíz', price: 1.5 },
+            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
+        ]
+    },
+    {
+        id: 23,
+        name: 'Pizza Chabocha',
+        category: 'pizza',
+        time: '20–30 Min',
+        desc: 'Salsa napole, pollo, queso mozzarella, pimentón y maíz. 8 pedazos.',
+        img: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [10, 16, 21.8],
+        addons: [
+            { name: 'Champiñones o maíz', price: 1.5 },
+            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
+        ]
+    },
+    {
+        id: 24,
+        name: 'Pizza Pepperoni',
+        category: 'pizza',
+        time: '20–30 Min',
+        desc: 'Salsa napole, pepperoni, queso mozzarella, pimentón y maíz. 8 pedazos.',
+        img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [10.5, 16.5, 22],
+        addons: [
+            { name: 'Champiñones o maíz', price: 1.5 },
+            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
+        ]
+    },
+    {
+        id: 25,
+        name: 'Pizza Saperoco',
+        category: 'pizza',
+        time: '20–30 Min',
+        desc: 'Salsa napole, pollo, tocineta, carne mechada, chorizo, queso mozzarella, pimentón y maíz. 8 pedazos.',
+        img: 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=500&q=80',
+        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [15.1, 25.97, 32.38],
+        addons: [
+            { name: 'Champiñones o maíz', price: 1.5 },
+            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
+        ]
+    },
     // ── UNIDADES (PROMO) ──
     {
         id: 9,
@@ -1212,59 +1265,6 @@ const MENU = [
         img: 'img_chuletazo.jpeg',
         sizes: ['Estándar'], prices: [76.5],
         addons: []
-    },
-    // ── PIZZAS ──
-    {
-        id: 22,
-        name: 'Pizza Clásica',
-        category: 'pizza',
-        time: '20–30 Min',
-        desc: 'Salsa napole, queso mozzarella, jamón y pimentón. 8 pedazos.',
-        img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80',
-        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [9, 12.8, 18.15],
-        addons: [
-            { name: 'Champiñones o maíz', price: 1.5 },
-            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
-        ]
-    },
-    {
-        id: 23,
-        name: 'Pizza Chabocha',
-        category: 'pizza',
-        time: '20–30 Min',
-        desc: 'Salsa napole, pollo, queso mozzarella, pimentón y maíz. 8 pedazos.',
-        img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=500&q=80',
-        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [10, 16, 21.8],
-        addons: [
-            { name: 'Champiñones o maíz', price: 1.5 },
-            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
-        ]
-    },
-    {
-        id: 24,
-        name: 'Pizza Pepperoni',
-        category: 'pizza',
-        time: '20–30 Min',
-        desc: 'Salsa napole, pepperoni, queso mozzarella, pimentón y maíz. 8 pedazos.',
-        img: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80',
-        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [10.5, 16.5, 22],
-        addons: [
-            { name: 'Champiñones o maíz', price: 1.5 },
-            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
-        ]
-    },
-    {
-        id: 25,
-        name: 'Pizza Saperoco',
-        category: 'pizza',
-        time: '20–30 Min',
-        desc: 'Salsa napole, pollo, tocineta, carne mechada, chorizo, queso mozzarella, pimentón y maíz. 8 pedazos.',
-        img: 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=500&q=80',
-        sizes: ['Pequeña', 'Mediana', 'Familiar'], prices: [15.1, 25.97, 32.38],
-        addons: [
-            { name: 'Champiñones o maíz', price: 1.5 },
-            { name: 'Chorizo, pepperoni o tocineta', price: 2 },
-        ]
     },
     // ── SALCHIPAPAS ──
     {
@@ -1477,10 +1477,10 @@ function filterSearch(q) {
 const CATS = [
     { key:'all',    label:'Todos',       img:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=200&q=80' },
     { key:'burger', label:'Burgers',     img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=80' },
+    { key:'pizza',  label:'Pizzas',      img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80' },
     { key:'promo',  label:'🔥 Unidades', img:'img_promo.jpeg' },
     { key:'combo',  label:'Combos',      img:'img_combomixto.jpeg' },
     { key:'rueda',  label:'Ruedas',      img:'img_supercartelua.jpeg' },
-    { key:'pizza',  label:'Pizzas',      img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80' },
     { key:'papas',  label:'Salchipapas', img:'img_mixta.jpeg' },
     { key:'bebida', label:'Bebidas',     img:'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=200&q=80' },
 ];
