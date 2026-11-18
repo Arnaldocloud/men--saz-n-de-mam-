@@ -403,7 +403,6 @@
         /* ══════════════════════════════
            SCREEN 3 – PRODUCT DETAIL
         ══════════════════════════════ */
-        #screen-product { padding-bottom: 110px; }
 
         .prod-img-section {
             height: 310px; background: var(--card);
@@ -522,13 +521,15 @@
         .addon-price { font-size: 14px; font-weight: 700; color: var(--orange); }
 
         /* Sticky bottom – product */
+        /* sticky y no fixed: la pantalla lleva transform, y ahí un fixed se
+           desplaza con el contenido y tapaba los extras (igual que en el carrito) */
         #prod-sticky {
-            position: fixed;
-            bottom: calc(72px + env(safe-area-inset-bottom, 0px));
-            left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 430px;
-            padding: 16px 20px 12px;
-            background: linear-gradient(to top, var(--bg) 65%, transparent);
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            margin-top: 8px;
+            padding: 20px 20px calc(84px + env(safe-area-inset-bottom, 0px));
+            background: linear-gradient(to top, var(--bg) 82%, transparent);
             z-index: 150;
             display: flex; align-items: center; justify-content: space-between; gap: 16px;
         }
@@ -1343,7 +1344,7 @@ const MENU = [
         category: 'bebida',
         time: '5 Min',
         desc: 'Refresco frío en botella individual.',
-        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=500&q=80',
         sizes: ['Estándar'], prices: [1],
         addons: []
     },
@@ -1353,7 +1354,7 @@ const MENU = [
         category: 'bebida',
         time: '5 Min',
         desc: 'Refresco frío de 1 litro. <em>Ideal para compartir.</em>',
-        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=500&q=80',
         sizes: ['Estándar'], prices: [2],
         addons: []
     },
@@ -1363,7 +1364,7 @@ const MENU = [
         category: 'bebida',
         time: '5 Min',
         desc: 'Refresco frío de litro y medio. <em>Para toda la familia.</em>',
-        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=500&q=80',
         sizes: ['Estándar'], prices: [2.5],
         addons: []
     },
@@ -1373,7 +1374,7 @@ const MENU = [
         category: 'bebida',
         time: '5 Min',
         desc: 'Refresco frío de 2 litros. <em>Para toda la familia.</em>',
-        img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=500&q=80',
+        img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=500&q=80',
         sizes: ['Estándar'], prices: [3],
         addons: []
     },
@@ -1481,7 +1482,7 @@ const CATS = [
     { key:'rueda',  label:'Ruedas',      img:'img_supercartelua.jpeg' },
     { key:'pizza',  label:'Pizzas',      img:'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200&q=80' },
     { key:'papas',  label:'Salchipapas', img:'img_mixta.jpeg' },
-    { key:'bebida', label:'Bebidas',     img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=200&q=80' },
+    { key:'bebida', label:'Bebidas',     img:'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=200&q=80' },
 ];
 
 /* Slot positions for a 5-item page (scattered bubble layout) — todos 70px */
@@ -1607,7 +1608,7 @@ function selectCategory(key) {
 function renderProductScreen() {
     const p = currentProduct;
     $s('product').innerHTML = `
-        <div style="min-height:100vh;padding-bottom:110px;">
+        <div>
 
             <!-- Image -->
             <div class="prod-img-section">
@@ -1657,7 +1658,7 @@ function renderProductScreen() {
                 </div>
 
                 <!-- Add-ons -->
-                <div class="prod-section-title">Extras</div>
+                <div class="prod-section-title" ${p.addons.length ? '' : 'style="display:none"'}>Extras</div>
                 <div id="addon-list">
                     ${p.addons.map((a, i) => `
                         <div class="addon-row" onclick="toggleAddon(${i})">
