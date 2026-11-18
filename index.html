@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Sazón de Mamá</title>
+    <title>La Sazón de Mamá · Menú</title>
+    <meta name="description" content="Hamburguesas, pizzas, ruedas, combos familiares y salchipapas en Pedraza, Barinas. Arma tu pedido y envíalo por WhatsApp.">
+    <meta name="theme-color" content="#111111">
+    <link rel="icon" href="logo.jpg">
+    <link rel="apple-touch-icon" href="logo.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="La Sazón de Mamá">
+    <meta property="og:title" content="La Sazón de Mamá · Menú">
+    <meta property="og:description" content="Hamburguesas, pizzas, ruedas, combos familiares y salchipapas en Pedraza, Barinas. Arma tu pedido y envíalo por WhatsApp.">
+    <meta property="og:url" content="https://arnaldocloud.github.io/men--saz-n-de-mam-/">
+    <meta property="og:image" content="https://arnaldocloud.github.io/men--saz-n-de-mam-/logo.jpg">
+    <meta property="og:locale" content="es_VE">
+    <meta name="twitter:card" content="summary">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -101,7 +113,7 @@
             border-top: 1px solid var(--border);
             display: none;               /* shown after splash */
             align-items: center;
-            justify-content: space-around;
+            justify-content: center; gap: 72px;
             padding: 12px 16px 24px;
             z-index: 200;
         }
@@ -191,7 +203,7 @@
 
         .splash-cta {
             display: flex; align-items: center; gap: 14px;
-            margin-top: 24px;
+            margin-top: 36px;
             padding-bottom: calc(48px + env(safe-area-inset-bottom, 24px));
         }
 
@@ -259,7 +271,9 @@
             display: flex; gap: 0;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
+        .cat-viewport::-webkit-scrollbar { display: none; }
         .cat-pg {
             position: relative; flex: 0 0 100%; height: 100%;
             transition: opacity .25s ease, transform .25s ease;
@@ -530,8 +544,6 @@
         /* ══════════════════════════════
            SCREEN 4 – CART
         ══════════════════════════════ */
-        #screen-cart { padding-bottom: 210px; }
-
         .cart-header {
             padding: 52px 20px 20px;
             display: flex; align-items: center; justify-content: space-between;
@@ -627,13 +639,42 @@
         .sum-total-lbl { font-size: 15px; font-weight: 700; color: var(--text); }
         .sum-total-val { font-size: 22px; font-weight: 900; color: var(--orange); }
 
+        /* Datos del pedido */
+        #order-form {
+            margin: 16px 20px 0;
+            background: var(--card); border-radius: 20px; padding: 20px;
+        }
+        #order-form h3 { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 14px; }
+        .of-label { display: block; font-size: 12px; color: var(--muted); margin: 12px 0 6px; }
+        .of-label:first-of-type { margin-top: 0; }
+        .of-input {
+            width: 100%; background: var(--card2); color: var(--text);
+            border: 1px solid transparent; border-radius: 12px;
+            padding: 12px 14px; font-family: 'Poppins', sans-serif; font-size: 14px;
+            outline: none; resize: none;
+        }
+        .of-input:focus { border-color: var(--orange); }
+        .of-input.of-error { border-color: #ef4444; }
+        .of-input::placeholder { color: #666; }
+        .of-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+        .of-choice {
+            flex: 1 1 auto; min-width: 0;
+            background: var(--card2); color: var(--muted);
+            border: 1px solid transparent; border-radius: 12px;
+            padding: 10px 12px; font-family: 'Poppins', sans-serif;
+            font-size: 13px; font-weight: 600; cursor: pointer;
+        }
+        .of-choice.active { background: rgba(249,115,22,.12); color: var(--orange); border-color: var(--orange); }
+        .of-choices.of-error .of-choice { border-color: #ef4444; }
+
         /* Cart checkout sticky */
+        /* sticky y no fixed: la pantalla lleva transform, y ahí un fixed
+           se desplaza con el contenido y acababa tapando el formulario */
         #cart-sticky {
-            position: fixed;
-            bottom: calc(72px + env(safe-area-inset-bottom, 0px));
-            left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 430px;
-            padding: 16px 20px 12px;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            padding: 16px 20px calc(84px + env(safe-area-inset-bottom, 0px));
             background: linear-gradient(to top, var(--bg) 65%, transparent);
             z-index: 150;
         }
@@ -698,12 +739,6 @@
             <p>Las mejores recetas caseras de Pedraza, Barinas. Auténtico sabor de hogar, directo a tu puerta.</p>
         </div>
 
-        <div class="splash-dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-
         <div class="splash-cta">
             <button onclick="goHome()" class="btn-ora" style="width:100%;height:54px;border-radius:50px;font-size:16px;letter-spacing:.3px;">
                 Comenzar &rarr;
@@ -733,13 +768,6 @@
                     Pedraza, Barinas
                 </div>
             </div>
-            <button class="icon-btn">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-            </button>
         </div>
 
         <!-- Search -->
@@ -750,13 +778,6 @@
                 </svg>
                 <input type="text" placeholder="Buscar comida..." oninput="filterSearch(this.value)">
             </div>
-            <button class="btn-ora filter-btn" style="border-radius:14px;">
-                <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
-                    <line x1="4" y1="6" x2="11" y2="6"/><line x1="4" y1="18" x2="13" y2="18"/>
-                    <line x1="4" y1="12" x2="20" y2="12"/>
-                    <circle cx="14" cy="6" r="3"/><circle cx="16" cy="18" r="3"/>
-                </svg>
-            </button>
         </div>
 
         <!-- Categories Bubbles -->
@@ -772,7 +793,6 @@
         <!-- Featured -->
         <div class="feat-header">
             <h2>Nuestro Menú 🍔</h2>
-            <button class="see-all">Ver Todo</button>
         </div>
 
         <div id="food-grid"></div>
@@ -799,25 +819,9 @@
                 </svg>
             </button>
             <span class="cart-title" id="cart-title">0 Ítem</span>
-            <button class="icon-btn">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="5" r="1.2" fill="currentColor"/>
-                    <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
-                    <circle cx="12" cy="19" r="1.2" fill="currentColor"/>
-                </svg>
-            </button>
+            <span style="width:42px;flex-shrink:0;"></span>
         </div>
 
-        <div class="select-all">
-            <button class="select-all-btn">
-                <div class="select-all-icon">
-                    <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                    </svg>
-                </div>
-                Seleccionar Todo
-            </button>
-        </div>
 
         <!-- Items list -->
         <div class="cart-items-wrap" id="cart-items-wrap"></div>
@@ -848,6 +852,34 @@
             </div>
         </div>
 
+        <!-- Datos del pedido -->
+        <div id="order-form">
+            <h3>Datos del pedido</h3>
+            <label class="of-label" for="of-nombre">Tu nombre</label>
+            <input class="of-input" id="of-nombre" type="text" autocomplete="name" placeholder="Ej.: María Pérez" oninput="guardarDatos()">
+
+            <span class="of-label">¿Cómo lo quieres?</span>
+            <div class="of-choices" id="of-entrega">
+                <button type="button" class="of-choice" data-v="Delivery" onclick="elegir('entrega', this)">🛵 Delivery</button>
+                <button type="button" class="of-choice" data-v="Retiro en el local" onclick="elegir('entrega', this)">🏠 Retiro en el local</button>
+            </div>
+
+            <div id="of-dir-wrap" style="display:none;">
+                <label class="of-label" for="of-dir">Dirección de entrega</label>
+                <textarea class="of-input" id="of-dir" rows="2" autocomplete="street-address" placeholder="Sector, calle, casa y un punto de referencia" oninput="guardarDatos()"></textarea>
+            </div>
+
+            <span class="of-label">Forma de pago</span>
+            <div class="of-choices" id="of-pago">
+                <button type="button" class="of-choice" data-v="Efectivo" onclick="elegir('pago', this)">Efectivo</button>
+                <button type="button" class="of-choice" data-v="Pago móvil" onclick="elegir('pago', this)">Pago móvil</button>
+                <button type="button" class="of-choice" data-v="Cashea" onclick="elegir('pago', this)">Cashea</button>
+            </div>
+
+            <label class="of-label" for="of-nota">Nota (opcional)</label>
+            <input class="of-input" id="of-nota" type="text" placeholder="Ej.: sin cebolla, vuelto de $20" oninput="guardarDatos()">
+        </div>
+
         <!-- Checkout fixed -->
         <div id="cart-sticky">
             <button class="btn-ora checkout-btn" onclick="checkout()">
@@ -874,21 +906,6 @@
             <div id="nav-badge">0</div>
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-10H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-        </div>
-        <div class="nav-item">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-            </svg>
-        </div>
-        <div class="nav-item">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-            </svg>
-        </div>
-        <div class="nav-item">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
             </svg>
         </div>
     </nav>
@@ -1395,6 +1412,8 @@ function navigate(to) {
     if (to === 'cart') renderCart();
 }
 
+document.addEventListener('DOMContentLoaded', cargarDatos);
+
 function goHome() {
     document.getElementById('bottom-nav').style.display = 'flex';
     navigate('home');
@@ -1429,16 +1448,11 @@ function renderGrid(items) {
             <div class="card-img-wrap">
                 <img src="${item.img}" alt="${item.name}" loading="lazy">
                 <div class="card-img-overlay"></div>
-                <button class="card-quick-add" onclick="event.stopPropagation();quickAdd(${item.id})">
-                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-                    </svg>
-                </button>
             </div>
             <div class="card-body">
                 <div class="card-name">${item.name}</div>
                 <div class="card-meta">
-                                        <span class="card-price">${money(item.prices[0])}</span>
+                                        <span class="card-price">${item.sizes.length > 1 ? '<small style="font-size:10px;font-weight:600;color:var(--muted);">desde </small>' : ''}${money(item.prices[0])}</span>
                 </div>
                 <button class="btn-ora card-add-btn" onclick="event.stopPropagation();quickAdd(${item.id})">
                     <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5">
@@ -1608,21 +1622,7 @@ function renderProductScreen() {
                         </svg>
                     </button>
                 </div>
-                <!-- Heart -->
-                <div class="prod-heart">
-                    <button class="prod-ctrl-btn" onclick="this.innerHTML=this.innerHTML.includes('none')?'<svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;#F97316&quot;><path d=&quot;M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z&quot;/></svg>':'<svg width=&quot;18&quot; height=&quot;18&quot; fill=&quot;none&quot; viewBox=&quot;0 0 24 24&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;><path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; d=&quot;M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z&quot;/></svg>'">
-                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
-                    </button>
-                </div>
 
-                <!-- Dots -->
-                <div class="prod-dots">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
             </div>
 
             <!-- Content -->
@@ -1648,9 +1648,9 @@ function renderProductScreen() {
                     </div>
                 </div>
 
-                <!-- Sizes -->
-                <div class="prod-section-title">Opciones de Tamaño</div>
-                <div id="size-pills">
+                <!-- Sizes (solo si el plato tiene más de uno) -->
+                <div class="prod-section-title" ${p.sizes.length > 1 ? '' : 'style="display:none"'}>Opciones de Tamaño</div>
+                <div id="size-pills" ${p.sizes.length > 1 ? '' : 'style="display:none"'}>
                     ${p.sizes.map((s, i) => `
                         <button class="size-pill ${i === 0 ? 'active' : ''}" onclick="selectSize(${i})">${s}</button>
                     `).join('')}
@@ -1754,6 +1754,7 @@ function addToCart() {
 
 function quickAdd(id) {
     const p   = MENU.find(m => m.id === id);
+    if (p.sizes.length > 1) { openProduct(id); return; }
     const key = cartKey(id, 0, new Set());
     if (cart[key]) {
         cart[key].qty++;
@@ -1824,7 +1825,7 @@ function renderCart() {
             <img class="ci-img" src="${v.item.img}" alt="${v.item.name}" loading="lazy">
             <div class="ci-info">
                 <div class="ci-name">${v.item.name}</div>
-                <div class="ci-size">${v.size}${v.addonNames.length ? ' · ' + v.addonNames.join(', ') : ''}</div>
+                <div class="ci-size">${detalleLinea(v, ' · ', ', ')}</div>
                 <div class="ci-price">${money(v.unitPrice * v.qty)}</div>
             </div>
             <div class="ci-controls">
@@ -1844,14 +1845,90 @@ function renderCart() {
     `).join('');
 }
 
+/* ══════════════════════════════════════════
+   DATOS DEL PEDIDO
+══════════════════════════════════════════ */
+const pedido = { entrega: '', pago: '' };
+const CLAVE_DATOS = 'sazon_datos_pedido';
+
+/* Tamaño solo si el plato tiene varios; después, los extras */
+function detalleLinea(v, sepTam, sepExtras) {
+    const partes = [];
+    if (v.item.sizes.length > 1) partes.push(v.size);
+    if (v.addonNames.length) partes.push(v.addonNames.join(sepExtras));
+    return partes.join(sepTam);
+}
+
+function elegir(campo, btn) {
+    pedido[campo] = btn.dataset.v;
+    const grupo = $('of-' + campo);
+    grupo.querySelectorAll('.of-choice').forEach(b => b.classList.toggle('active', b === btn));
+    grupo.classList.remove('of-error');
+    if (campo === 'entrega') $('of-dir-wrap').style.display = pedido.entrega === 'Delivery' ? 'block' : 'none';
+    guardarDatos();
+}
+
+/* Recordar los datos en este teléfono para el próximo pedido */
+function guardarDatos() {
+    ['of-nombre', 'of-dir'].forEach(id => $(id).classList.remove('of-error'));
+    try {
+        localStorage.setItem(CLAVE_DATOS, JSON.stringify({
+            nombre: $('of-nombre').value, dir: $('of-dir').value,
+            entrega: pedido.entrega, pago: pedido.pago,
+        }));
+    } catch (e) {}
+}
+
+function cargarDatos() {
+    let d = null;
+    try { d = JSON.parse(localStorage.getItem(CLAVE_DATOS) || 'null'); } catch (e) {}
+    if (!d) return;
+    $('of-nombre').value = d.nombre || '';
+    $('of-dir').value    = d.dir || '';
+    ['entrega', 'pago'].forEach(campo => {
+        const btn = d[campo] && $('of-' + campo).querySelector(`[data-v="${d[campo]}"]`);
+        if (btn) elegir(campo, btn);
+    });
+}
+
+function faltaDato(el) {
+    el.classList.add('of-error');
+    // Solo desplazamiento vertical dentro del carrito: scrollIntoView corría
+    // de lado el #app (overflow: hidden) y dejaba las pantallas descuadradas
+    const pantalla = $s('cart');
+    const top = el.getBoundingClientRect().top - pantalla.getBoundingClientRect().top + pantalla.scrollTop - 140;
+    pantalla.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    if (el.focus && el.tagName !== 'DIV') el.focus({ preventScroll: true });
+    $('app').scrollLeft = 0;
+}
+
 function checkout() {
     const entries = Object.entries(cart);
     if (!entries.length) return;
-    const lines = entries.map(([, v]) =>
-        `• ${v.qty}x ${v.item.name} (${v.size})${v.addonNames.length ? ' + ' + v.addonNames.join(' + ') : ''} — ${money(v.unitPrice * v.qty)}`
-    ).join('\n');
+
+    const nombre = $('of-nombre').value.trim();
+    const dir    = $('of-dir').value.trim();
+    const nota   = $('of-nota').value.trim();
+    if (!nombre)         { faltaDato($('of-nombre'));  toast('Escribe tu nombre', '⚠️'); return; }
+    if (!pedido.entrega) { faltaDato($('of-entrega')); toast('Elige delivery o retiro', '⚠️'); return; }
+    if (pedido.entrega === 'Delivery' && !dir) { faltaDato($('of-dir')); toast('Escribe la dirección de entrega', '⚠️'); return; }
+    if (!pedido.pago)    { faltaDato($('of-pago'));    toast('Elige la forma de pago', '⚠️'); return; }
+
+    const lines = entries.map(([, v]) => {
+        const det = detalleLinea(v, ' · ', ' + ');
+        return `• ${v.qty}x ${v.item.name}${det ? ' (' + det + ')' : ''} — ${money(v.unitPrice * v.qty)}`;
+    }).join('\n');
     const total = entries.reduce((s, [, v]) => s + v.unitPrice * v.qty, 0);
-    const msg   = `¡Hola La Sazón de Mamá! 👋\n\nQuiero hacer el siguiente pedido:\n\n${lines}\n\n💰 *Total: ${money(total)}*\n\n¿Me confirman disponibilidad para enviar mi ubicación? 🙏`;
+    const datos = [
+        `👤 *Nombre:* ${nombre}`,
+        pedido.entrega === 'Delivery' ? `🛵 *Delivery a:* ${dir}` : `🏠 *Retiro en el local*`,
+        `💳 *Pago:* ${pedido.pago}`,
+        nota ? `📝 *Nota:* ${nota}` : '',
+    ].filter(Boolean).join('\n');
+    const cierre = pedido.entrega === 'Delivery'
+        ? '¿Me confirman el pedido y el costo del delivery? 🙏'
+        : '¿Me confirman el pedido y a qué hora lo retiro? 🙏';
+    const msg   = `¡Hola La Sazón de Mamá! 👋\n\nQuiero hacer el siguiente pedido:\n\n${lines}\n\n💰 *Total: ${money(total)}*${pedido.entrega === 'Delivery' ? ' + delivery' : ''}\n\n${datos}\n\n${cierre}`;
     window.open(`https://wa.me/584122049576?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
@@ -1859,9 +1936,9 @@ function checkout() {
    TOAST
 ══════════════════════════════════════════ */
 let toastTimer = null;
-function toast(msg) {
+function toast(msg, icono = '✓') {
     const el = $('toast');
-    el.textContent = '✓ ' + msg;
+    el.textContent = icono + ' ' + msg;
     el.style.display = 'block';
     el.style.animation = 'none';
     void el.offsetWidth;
